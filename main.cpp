@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 
 class habit{
@@ -7,7 +8,7 @@ class habit{
     string hname;
     int streak;
     public:
-    habit(int id,string name){
+    habit(){
     
         cout<<"Enter Task and Id";
         cin>>hname>>id;
