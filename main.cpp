@@ -1,50 +1,63 @@
-#include<iostream>
-
+#include <iostream>
+#include <string>
 using namespace std;
 
-class habit{
-    private:
+class habit {
+protected:
     int id;
     string hname;
     int streak;
-    public:
-    habit(){
-    
-        cout<<"Enter Task and Id : ";
-        getline(cin,hname);
-        cin>>id;
-        streak=0;
-        cout<<"Habit Created : "<<hname<<endl;
-    
-    }
-    ~habit(){
-    cout<<"Habit Destroyed "<<hname<<endl;
+
+public:
+    habit(string name, int i) {
+        hname = name;
+        id = i;
+        streak = 0;
+        cout << "Habit Created: " << hname << endl;
     }
 
+    virtual void markcomplete() {
+        streak++;
+        cout << "Habit marked complete: "
+             << hname << " | Streak: " << streak << endl;
+    }
 
-    void markcomplete();
+    int getstreak() {
+        return streak;
+    }
 
-    inline int getstreak(){
-
-    return streak;
-}
-
-    
-    friend void display();
+    virtual ~habit() {
+        cout << "Habit Destroyed: " << hname << endl;
+    }
 };
 
-void habit::markcomplete(){
-    streak++;
-    cout<<"mark completed"<<endl;
-}
+class NormalHabit : public habit {
+public:
+    NormalHabit(string name, int id) : habit(name, id) {}
 
+    void markcomplete() override {
+        streak++;
+        cout << "Tracked \"" << hname
+             << "\" successfully | Streak: " << streak << endl;
+    }
+};
 
-int main(){
+int main() {
 
-    habit h1;
-    h1.markcomplete();
-    habit h2(h1);
+    string name;
+    int id;
 
-    h2.markcomplete();
+    cout << "Enter habit you want to track: ";
+    getline(cin >> ws, name);
+
+    cout << "Enter habit id: ";
+    cin >> id;
+
+    habit* h = new NormalHabit(name, id);
+
+    h->markcomplete();
+    h->markcomplete();
+
+    delete h;
     return 0;
 }

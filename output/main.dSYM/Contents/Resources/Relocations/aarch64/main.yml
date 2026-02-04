@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/vinitgaikwad/oopsproject/Smart-Habit-Tracker/output/main'
+relocations:     []
+...
